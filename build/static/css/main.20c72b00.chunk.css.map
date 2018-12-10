@@ -1,0 +1,1 @@
+{"version":3,"sources":["C:/code/FullStackOpen/react-app/src/C:/code/FullStackOpen/react-app/src/index.css"],"names":[],"mappings":"AAAA,SACE,iBAAkB,AAClB,eAAgB,AAChB,YAAc,CACf","file":"main.20c72b00.chunk.css","sourcesContent":[".message {\r\n  background: green;\r\n  font-size: 20px;\r\n  padding: 10px;\r\n}\r\n"]}
