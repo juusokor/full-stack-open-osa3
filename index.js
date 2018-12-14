@@ -98,22 +98,6 @@ app.post("/api/persons", (request, response) => {
       console.log(error);
       response.status(404).end();
     });
-
-  // const person = new Person({
-  //   name: body.name,
-  //   number: body.number
-  // });
-
-  // person
-  //   .save()
-  //   .then(savedNumber => {
-  //     response.json(Person.format(savedNumber));
-  //     console.log(Person.format(savedNumber));
-  //   })
-  //   .catch(error => {
-  //     console.log(error);
-  //     response.status(404).end();
-  //   });
 });
 
 app.delete("/api/persons/:id", (request, response) => {
