@@ -1,9 +1,8 @@
 # full-stack-open-osa3
 
-Sumbission for Full Stack Open part 3
+Sumbission for Full Stack Open part 3 (3.1 - 3.20)
 
-- 3.1 - 3.20
-  Link to app:
+- Link to app:
   https://mighty-brushlands-29361.herokuapp.com/
-  API:
+- API:
   https://mighty-brushlands-29361.herokuapp.com/api/persons
