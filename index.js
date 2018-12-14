@@ -3,6 +3,8 @@ const morgan = require("morgan");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const Person = require("./models/number");
+
 app.use(express.static("build"));
 app.use(cors());
 app.use(bodyParser.json());
@@ -38,25 +40,35 @@ let persons = [
   }
 ];
 
-app.get("/info", (req, res) => {
+app.get("/api/info", (request, response) => {
   const count = persons.length;
+
   const date = Date();
-  res.send("puhelin luettelossa on " + count + " henkilön tiedot<br>" + date);
+  response.send(
+    "puhelin luettelossa on " + count + " henkilön tiedot<br>" + date
+  );
 });
 
-app.get("/api/persons", (req, res) => {
-  res.json(persons);
+app.get("/api/persons", (request, response) => {
+  Person.find({})
+    .then(persons => {
+      response.json(persons.map(Person.format));
+    })
+    .catch(error => {
+      console.log(error);
+      response.status(404).end();
+    });
 });
 
 app.get("/api/persons/:id", (request, response) => {
-  const id = Number(request.params.id);
-  const person = persons.find(person => person.id === id);
-
-  if (person) {
-    response.json(person);
-  } else {
-    response.status(404).end();
-  }
+  Person.findById(request.params.id)
+    .then(person => {
+      response.json(Person.format(person));
+    })
+    .catch(error => {
+      console.log(error);
+      response.status(404).end();
+    });
 });
 
 const generateId = () => {
@@ -79,20 +91,24 @@ app.post("/api/persons", (request, response) => {
     });
   }
 
-  const person = {
+  const person = new Person({
     name: body.name,
-    number: body.number,
-    id: generateId()
-  };
+    number: body.number
+  });
 
-  persons = persons.concat(person);
-
-  response.json(person);
+  person
+    .save()
+    .then(savedNumber => {
+      response.json(Person.format(savedNumber));
+    })
+    .catch(error => {
+      console.log(error);
+      response.status(404).end();
+    });
 });
 
 app.delete("/api/persons/:id", (request, response) => {
-  const id = Number(request.params.id);
-
+  const id = Person(request.params.id);
   persons = persons.filter(person => person.id !== id);
 
   response.status(204).end();

@@ -3,13 +3,15 @@ const config = require("./config");
 
 const url = config.url;
 
-const Number = mongoose.model("Number", {
+const personSchema = new mongoose.Schema({
   name: String,
   number: String
 });
 
+const Person = mongoose.model("Person", personSchema);
+
 addNumberToDB = (name, num) => {
-  const new_number = new Number({
+  const new_number = new Person({
     name: name,
     number: num
   });
@@ -22,7 +24,7 @@ addNumberToDB = (name, num) => {
 
 findAll = () => {
   mongoose.connect(url);
-  Number.find({}).then(result => {
+  Person.find({}).then(result => {
     console.log("puhelinluettelo:");
     result.forEach(element => {
       console.log(element.name, element.number);
