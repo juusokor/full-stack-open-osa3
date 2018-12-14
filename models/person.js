@@ -9,11 +9,11 @@ const personSchema = new mongoose.Schema({
   number: String
 });
 
-personSchema.statics.format = function(number) {
+personSchema.statics.format = function(name) {
   return {
-    name: number.name,
-    number: number.number,
-    id: number._id
+    name: name.name,
+    number: name.number,
+    id: name._id
   };
 };
 const Person = mongoose.model("Person", personSchema);

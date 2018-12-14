@@ -1,1 +1,2 @@
-delete https://mighty-brushlands-29361.herokuapp.com/api/persons/5064622
+delete http://localhost:3001/api/persons/5c1398f2d98e462f601bfee4
+// delete https://mighty-brushlands-29361.herokuapp.com/api/persons/5c139213060bdf02a8b50707
