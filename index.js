@@ -59,35 +59,61 @@ app.get("/api/persons/:id", (request, response) => {
 
 app.post("/api/persons", (request, response) => {
   const body = request.body;
+  console.log(body);
 
-  if (body.name === undefined || body.number === undefined) {
+  if (body.name === undefined) {
     return response.status(400).json({ error: "name is missing" });
   }
   if (body.number === undefined) {
     return response.status(400).json({ error: "number is missing" });
   }
 
-  // if (persons.find(e => e.name === body.name)) {
-  //   return response.status(400).json({
-  //     error: "name must be unique. name " + body.name + " is already in list."
-  //   });
-  // }
+  Person.findOne({ name: body.name })
+    .then(result => {
+      if (result) {
+        if (result.name === body.name) {
+          response.status(400).send({
+            error: "name must be unique. name " + body.name + " already exists!"
+          });
+        }
+      } else {
+        const person = new Person({
+          name: body.name,
+          number: body.number
+        });
 
-  const person = new Person({
-    name: body.name,
-    number: body.number
-  });
-
-  person
-    .save()
-    .then(savedNumber => {
-      response.json(Person.format(savedNumber));
-      console.log(Person.format(savedNumber));
+        person
+          .save()
+          .then(savedNumber => {
+            response.json(Person.format(savedNumber));
+            console.log(Person.format(savedNumber));
+          })
+          .catch(error => {
+            console.log(error);
+            response.status(404).end();
+          });
+      }
     })
     .catch(error => {
       console.log(error);
       response.status(404).end();
     });
+
+  // const person = new Person({
+  //   name: body.name,
+  //   number: body.number
+  // });
+
+  // person
+  //   .save()
+  //   .then(savedNumber => {
+  //     response.json(Person.format(savedNumber));
+  //     console.log(Person.format(savedNumber));
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //     response.status(404).end();
+  //   });
 });
 
 app.delete("/api/persons/:id", (request, response) => {

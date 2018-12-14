@@ -1,7 +1,8 @@
-post https://mighty-brushlands-29361.herokuapp.com/api/persons/4
+post http://localhost:3001/api/persons
+// post https://mighty-brushlands-29361.herokuapp.com/api/persons/4
 Content-Type: application/json
 
 {
-    "name": "TEST",
-    "number": "1231"
+    "name": "POSTMANi",
+    "number": "4352"
 }
