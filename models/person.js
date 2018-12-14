@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
-const config = require("../config");
 
-const url = config.url;
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
+const url = process.env.MONGODB_URI;
 mongoose.connect(url);
 
 const personSchema = new mongoose.Schema({
