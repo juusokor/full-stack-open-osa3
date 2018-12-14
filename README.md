@@ -2,6 +2,8 @@
 
 Sumbission for Full Stack Open part 3
 
-- 3.1 - 3.10
-
-https://mighty-brushlands-29361.herokuapp.com/api/persons
+- 3.1 - 3.20
+  Link to app:
+  https://mighty-brushlands-29361.herokuapp.com/
+  API:
+  https://mighty-brushlands-29361.herokuapp.com/api/persons
